@@ -147,7 +147,7 @@ impl<T: Account> Wallet for BasicWallet<T> {
                 recipient_wallet_id: to_wallet.get_wallet_id().to_string(),
                 recipient_wallet_type: to_wallet.get_wallet_type(),
                 is_successful: false,
-                error_message: Some("Source account not found or currency mismatch".to_string()),
+                error_message: Some(format!("Source account currency: {}, Receiver account currency: {}, mismatch", self.account.get_currency(), currency)),
             }
         };
 

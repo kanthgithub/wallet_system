@@ -11,7 +11,7 @@ mod tests {
 
     #[test]
     fn test_new_account() {
-        let account = BasicAccount::new("USD");
+        let account: Box<dyn Account> = Box::new(BasicAccount::new("USD"));
         assert_eq!(account.get_balance(), 0.0);
         assert_eq!(account.get_currency(), "USD");
         // assert the accountId as it must start with prefix 'Basic'

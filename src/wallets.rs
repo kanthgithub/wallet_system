@@ -1,7 +1,7 @@
 use crate::accounts::{Account, AccountResponse, AccountType};
 use std::borrow::Cow;
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WalletType {
     Basic,
     MultiCurrency,
