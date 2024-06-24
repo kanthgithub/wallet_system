@@ -43,14 +43,42 @@ The use of generics in `BasicWallet` and not in `MultiCurrencyWallet` is due to 
 Traits are used to define shared behavior. In this project, the `Wallet` and `Account` traits define a common 
 interface for all types of wallets and accounts.
 
+#### Traits in Rust:  
+Traits are used to define shared behavior.
+A trait is defined with the trait keyword, followed by the trait's name.
+Traits can have methods with or without default implementations.
+Traits can be implemented for any data type.
+Traits can be used as function parameters, enabling dynamic dispatch.
+Traits can be used as trait bounds on generic parameters, enabling static dispatch.
+Traits can inherit from other traits. This is done by specifying the parent trait in the trait definition. The child trait will then include the method signatures of the parent trait.
+
 ### Generics
 
 Generics are used in the `Wallet` trait to allow for different types of accounts to be added to a wallet.
+The `BasicWallet` struct is generic over the `Account` type, which allows it to hold any type that implements the `Account` trait.
+The `MultiCurrencyWallet` struct, on the other hand, uses trait objects to store multiple accounts of different types.
+
+#### Generics in Rust:  
+Generics are used to create functions and data types that can work with multiple types of data.
+Generics are declared using angle brackets <T> where T is a placeholder for the type.
+The actual type for T is determined at compile time.
+Generics can be constrained by traits to only accept types that implement certain behaviors.
+Multiple generic types can be used by separating them with commas, like <T, U>.
+Lifetimes, which dictate how references to data should be handled, can also be generic.
+
 
 ### Polymorphism
 
 Polymorphism is used to allow for different types of wallets and accounts to be treated the same way. 
 For example, a `BasicWallet` and a `MultiCurrencyWallet` can both be treated as a `Wallet`.
+a `BasicAccount` and a `PremiumAccount` can both be treated as an `Account`.
+
+#### Polymorphism in Rust:  
+Rust achieves polymorphism through the use of traits and trait objects.
+A trait defines a set of methods that a type must have to be considered as implementing that trait.
+Trait objects allow for multiple different types, each of which implement a particular trait, to be treated as the same general type.
+Trait objects are created by specifying a trait behind a reference, box, or other pointer type, like &dyn Trait or Box<dyn Trait>.
+Trait objects are dynamic and their type is checked at runtime.
 
 ## Functions
 

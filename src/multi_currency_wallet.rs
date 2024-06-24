@@ -1,7 +1,7 @@
 use rand::distributions::Alphanumeric;
 use rand::Rng;
 use crate::accounts::{Account, AccountResponse};
-use crate::wallets::{TransferResponse, Wallet, WalletType, WithdrawWalletResponse};
+use crate::wallets::{DisplayWallet, TransferResponse, Wallet, WalletType, WithdrawWalletResponse};
 
 /// Multi-currency wallet managing multiple accounts
 pub struct MultiCurrencyWallet {
@@ -26,6 +26,20 @@ impl MultiCurrencyWallet {
             accounts: Vec::new(),
             wallet_id,
             wallet_type: WalletType::MultiCurrency,
+        }
+    }
+}
+
+impl DisplayWallet for MultiCurrencyWallet {
+    fn display_details(&self) {
+        println!("Wallet ID: {}", self.wallet_id);
+        println!("Wallet Type: {:?}", self.wallet_type);
+        println!("-----------------------------");
+        for (i, account) in self.accounts.iter().enumerate() {
+            println!("Account {} Details: ", i+1);
+            println!("-----------------------------");
+            account.display_details();
+            println!("-----------------------------");
         }
     }
 }

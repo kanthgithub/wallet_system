@@ -7,7 +7,7 @@ pub enum WalletType {
     MultiCurrency,
 }
 
-pub struct TransferResponse {
+pub struct TransferResponse  {
     pub currency: String,
     pub amount: f64,
     pub sender_account_number: String,
@@ -32,8 +32,12 @@ pub struct WithdrawWalletResponse {
     pub error_message: Option<String>,
 }
 
+pub trait DisplayWallet {
+    fn display_details(&self);
+}
+
 // trait with functions that must be implemented by all wallets
-pub trait Wallet {
+pub trait Wallet : DisplayWallet {
     fn add_account(&mut self, account: Box<dyn Account>) -> Result<&dyn Account, String>;
     fn balance(&self, currency: &str) -> Result<f64, String>;
 

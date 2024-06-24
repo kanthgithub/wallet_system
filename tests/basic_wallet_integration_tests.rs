@@ -1,8 +1,9 @@
 #[cfg(test)]
 mod tests {
+    use std::io;
     use super::*;
     use wallet_system::accounts::AccountType;
-    use wallet_system::wallets::{Wallet, WalletType, TransferResponse};
+    use wallet_system::wallets::{Wallet, WalletType, TransferResponse, DisplayWallet};
     use wallet_system::basic_account::BasicAccount;
     use wallet_system::basic_wallet::BasicWallet;
 
@@ -87,4 +88,5 @@ mod tests {
         assert!(!response.is_successful);
         assert_eq!(response.error_message.unwrap(), "Source account currency: USD, Receiver account currency: EUR, mismatch");
     }
+
 }

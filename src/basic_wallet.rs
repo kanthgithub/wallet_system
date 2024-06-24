@@ -2,8 +2,9 @@ use std::borrow::Cow;
 use rand::distributions::Alphanumeric;
 use rand::Rng;
 use crate::accounts::{Account, AccountResponse, AccountType};
-use crate::wallets::{Wallet, WalletType, TransferResponse, WithdrawWalletResponse};
+use crate::wallets::{Wallet, WalletType, TransferResponse, WithdrawWalletResponse, DisplayWallet};
 
+#[derive(Debug)]
 pub struct BasicWallet<T: Account> {
     wallet_id: String,
     wallet_type: WalletType,
@@ -27,6 +28,18 @@ impl<T: Account> BasicWallet<T> {
             wallet_id,
             wallet_type: WalletType::Basic,
         }
+    }
+}
+
+impl<T: Account> DisplayWallet for BasicWallet<T> {
+    fn display_details(&self) {
+        println!("-----------------------------");
+        println!("Wallet ID: {}", self.wallet_id);
+        println!("Wallet Type: {:?}", self.wallet_type);
+        println!("-----------------------------");
+        println!("Account Details: ");
+        self.account.display_details();
+        println!("-----------------------------");
     }
 }
 
@@ -171,31 +184,31 @@ impl<T: Account> Wallet for BasicWallet<T> {
     }
 
     fn withdraw(&mut self, currency: &str, amount: f64) -> WithdrawWalletResponse {
-    if self.account.get_currency() == currency {
-        let withdrawal_result = self.account.withdraw(amount);
-        WithdrawWalletResponse {
-            wallet_id: self.wallet_id.clone(),
-            wallet_type: self.wallet_type.clone(),
-            currency: currency.to_string(),
-            amount,
-            account_number: self.account.get_account_number().to_string(),
-            account_type: self.account.get_account_type().clone(),
-            balance: self.account.get_balance(),
-            is_successful: withdrawal_result.is_successful,
-            error_message: withdrawal_result.error_message,
-        }
-    } else {
-        WithdrawWalletResponse {
-            wallet_id: self.wallet_id.clone(),
-            wallet_type: self.wallet_type.clone(),
-            currency: currency.to_string(),
-            amount,
-            account_number: "".to_string(),
-            account_type: AccountType::Basic, // Default account type
-            balance: 0.0,
-            is_successful: false,
-            error_message: Some("Currency mismatch".to_string()),
+        if self.account.get_currency() == currency {
+            let withdrawal_result = self.account.withdraw(amount);
+            WithdrawWalletResponse {
+                wallet_id: self.wallet_id.clone(),
+                wallet_type: self.wallet_type.clone(),
+                currency: currency.to_string(),
+                amount,
+                account_number: self.account.get_account_number().to_string(),
+                account_type: self.account.get_account_type().clone(),
+                balance: self.account.get_balance(),
+                is_successful: withdrawal_result.is_successful,
+                error_message: withdrawal_result.error_message,
+            }
+        } else {
+            WithdrawWalletResponse {
+                wallet_id: self.wallet_id.clone(),
+                wallet_type: self.wallet_type.clone(),
+                currency: currency.to_string(),
+                amount,
+                account_number: "".to_string(),
+                account_type: AccountType::Basic, // Default account type
+                balance: 0.0,
+                is_successful: false,
+                error_message: Some("Currency mismatch".to_string()),
+            }
         }
     }
-}
 }

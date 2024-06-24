@@ -103,6 +103,10 @@ mod tests {
         let mut wallet2 = MultiCurrencyWallet::new();
         let account2 = BasicAccount::new("USD");
         wallet2.add_account(Box::new(account2)).expect("Failed to add account");
+
+        // TODO demo that ownership is transferred for account2 and we cant perform any action on account2 after previous line
+        //account2.deposit(100.0);
+
         let response = wallet1.transfer(&mut wallet2, "USD", 50.0);
         assert!(!response.is_successful);
         assert_eq!(response.error_message.unwrap(), "Insufficient funds");

@@ -2,7 +2,7 @@ use rand::{distributions::Alphanumeric, Rng};
 use std::fmt;
 
 /// Enum defining account types
-#[derive(Debug, Clone)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AccountType {
     Basic,
     Premium,
@@ -41,13 +41,18 @@ impl fmt::Display for AccountType {
     }
 }
 
+pub trait DisplayAccount {
+    fn display_details(&self);
+}
+
 /// Trait defining common account operations
-pub trait Account {
+pub trait Account : DisplayAccount {
     fn get_balance(&self) -> f64;
     fn deposit(&mut self, amount: f64) -> AccountResponse;
     fn withdraw(&mut self, amount: f64) -> AccountResponse;
     fn get_currency(&self) -> &str;
     fn get_account_number(&self) -> &str;
-    fn get_account_type(&self) -> &AccountType;
-    fn transfer(&self, to_account: &mut dyn Account, amount: f64) -> AccountTransferResponse;
+    fn get_account_type(&self) -> AccountType;
+    fn transfer(&mut self, to_account: &mut dyn Account, amount: f64) -> AccountTransferResponse;
+    fn get_overdraft_limit(&self) -> f64;
 }
