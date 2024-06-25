@@ -34,12 +34,12 @@ mod tests {
         let mut account1 = PremiumAccount::new("USD", 500.0);
         let mut account2 = BasicAccount::new("USD");
         account1.deposit(200.0);
-        let response = account1.transfer(&mut account2, 100.0);
+        let response = account1.transfer(&mut account2, 700.0);
         assert_eq!(response.is_successful, true);
-        assert_eq!(account1.get_balance(), 100.0);
+        assert_eq!(account1.get_balance(), -500.0);
         println!("Balance1: {}", format!("{:.2}", account1.get_balance()));
         println!("Balance2: {}", format!("{:.2}", account2.get_balance()));
-        assert_eq!(account2.get_balance(), 100.0);
+        assert_eq!(account2.get_balance(), 700.0);
     }
 
     #[test]

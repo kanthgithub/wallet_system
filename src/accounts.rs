@@ -55,4 +55,9 @@ pub trait Account : DisplayAccount {
     fn get_account_type(&self) -> AccountType;
     fn transfer(&mut self, to_account: &mut dyn Account, amount: f64) -> AccountTransferResponse;
     fn get_overdraft_limit(&self) -> f64;
+
+    fn default_impl(&self) {
+        println!("Default implementation for Account trait");
+    }
+
 }

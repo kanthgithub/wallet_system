@@ -19,6 +19,12 @@ mod tests {
     }
 
     #[test]
+    fn test_override_default_impl() {
+        let mut account = BasicAccount::new("USD");
+        account.default_impl();
+    }
+
+    #[test]
     fn test_deposit() {
         let mut account = BasicAccount::new("USD");
         let response = account.deposit(100.0);

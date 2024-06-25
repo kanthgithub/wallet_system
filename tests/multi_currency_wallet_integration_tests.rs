@@ -42,6 +42,7 @@ mod tests {
         let account2 = BasicAccount::new("USD");
         wallet2.add_account(Box::new(account2)).expect("Failed to add account");
         wallet1.deposit("USD", 100.0);
+
         let response = wallet1.transfer(&mut wallet2, "USD", 50.0);
         assert!(response.is_successful);
         assert_eq!(wallet1.balance("USD").unwrap(), 50.0);

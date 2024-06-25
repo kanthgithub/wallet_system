@@ -43,6 +43,10 @@ impl DisplayAccount for BasicAccount {
 
 impl Account for BasicAccount {
 
+    fn default_impl(&self) {
+        println!("Default implementation for BasicAccount");
+    }
+
     fn get_balance(&self) -> f64 {
         self.balance
     }

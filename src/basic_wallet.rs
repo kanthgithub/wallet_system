@@ -1,3 +1,4 @@
+use std::any::TypeId;
 use std::borrow::Cow;
 use rand::distributions::Alphanumeric;
 use rand::Rng;
@@ -96,6 +97,10 @@ impl<T: Account> Wallet for BasicWallet<T> {
         amount: f64,
     ) -> TransferResponse {
         let sender_account_number = self.account.get_account_number().to_string();
+
+        // if TypeId::of::<T>() == TypeId::of::<BasicWallet<T>>() {
+        //     println!("string={:?}", "BasicWallet");
+        // }
 
         let recipient_account_number = to_wallet
             .find_account_index_by_currency(&currency)
