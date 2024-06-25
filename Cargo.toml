@@ -10,10 +10,6 @@ license = "MIT"
 rand = "0.9.0-alpha.1"
 clap = "3.0"
 
-[lib]
-name = "wallet_system"
-path = "src/lib.rs"
-
 [[test]]
 name = "basic_account_integration_tests"
 path = "tests/basic_account_integration_tests.rs"
