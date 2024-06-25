@@ -1,6 +1,6 @@
 use clap::{Arg, App, SubCommand};
-use wallet_system::accounts::{BasicAccount, PremiumAccount, Account};
-use wallet_system::wallets::{BasicWallet, MultiCurrencyWallet, Wallet};
+use wallet_system::basic_wallet::BasicWallet;
+use wallet_system::multi_currency_wallet::MultiCurrencyWallet;
 
 fn main() {
     let matches = App::new("Wallet CLI")
@@ -88,68 +88,4 @@ fn main() {
                     .index(4)),
         )
         .get_matches();
-
-    if let Some(matches) = matches.subcommand_matches("create_wallet") {
-        let wallet_type = matches.value_of("type").unwrap();
-        match wallet_type {
-            "basic" => {
-                let wallet = BasicWallet::new();
-                println!("Created a BasicWallet with ID: {}", wallet.get_wallet_id());
-            },
-            "multi" => {
-                let wallet = MultiCurrencyWallet::new();
-                println!("Created a MultiCurrencyWallet with ID: {}", wallet.get_wallet_id());
-            },
-            _ => println!("Invalid wallet type"),
-        }
-    } else if let Some(matches) = matches.subcommand_matches("create_account") {
-        let wallet_id = matches.value_of("wallet_id").unwrap();
-        let account_type = matches.value_of("type").unwrap();
-        let currency = matches.value_of("currency").unwrap();
-        let overdraft = matches.value_of("overdraft");
-
-        // Handle creating accounts in the specified wallet here
-        // For simplicity, this example does not store wallets persistently
-        println!(
-            "Creating a {} account with currency {} in wallet {}",
-            account_type, currency, wallet_id
-        );
-
-        // Additional logic to add the account to the specified wallet would go here
-    } else if let Some(matches) = matches.subcommand_matches("deposit") {
-        let wallet_id = matches.value_of("wallet_id").unwrap();
-        let amount: f64 = matches.value_of("amount").unwrap().parse().unwrap();
-        let currency = matches.value_of("currency").unwrap();
-
-        // Handle depositing into the specified account here
-        println!(
-            "Depositing {} {} into wallet {}",
-            amount, currency, wallet_id
-        );
-
-        // Additional logic to perform the deposit would go here
-    } else if let Some(matches) = matches.subcommand_matches("withdraw") {
-        let wallet_id = matches.value_of("wallet_id").unwrap();
-        let amount: f64 = matches.value_of("amount").unwrap().parse().unwrap();
-        let currency = matches.value_of("currency").unwrap();
-
-        // Handle withdrawing from the specified account here
-        println!(
-            "Withdrawing {} {} from wallet {}",
-            amount, currency, wallet_id
-        );
-
-        // Additional logic to perform the withdrawal would go here
-    } else if let Some(matches) = matches.subcommand_matches("transfer") {
-        let from_wallet_id = matches.value_of("from_wallet_id").unwrap();
-        let to_wallet_id = matches.value_of("to_wallet_id").unwrap();
-        let amount: f64 = matches.value_of("amount").unwrap().parse().unwrap();
-        let currency = matches.value_of("currency").unwrap();
-
-        // Handle transferring between the specified accounts here
-        println!(
-            "Transferring {} {} from wallet {} to wallet {}",
-            amount, currency, from_wallet_id, to_wallet_id
-        );
-    }
 }
