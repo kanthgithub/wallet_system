@@ -35,7 +35,6 @@ The use of generics in `BasicWallet` and not in `MultiCurrencyWallet` is due to 
 `BasicWallet` needs to know the exact type of its account at compile time, hence the use of generics. 
 `MultiCurrencyWallet` needs to handle multiple accounts of potentially different types, hence the use of trait objects.
 
-
 ## Traits, Generics, and Polymorphism
 
 ### Traits
@@ -44,13 +43,14 @@ Traits are used to define shared behavior. In this project, the `Wallet` and `Ac
 interface for all types of wallets and accounts.
 
 #### Traits in Rust:  
-Traits are used to define shared behavior.
-A trait is defined with the trait keyword, followed by the trait's name.
-Traits can have methods with or without default implementations.
-Traits can be implemented for any data type.
-Traits can be used as function parameters, enabling dynamic dispatch.
-Traits can be used as trait bounds on generic parameters, enabling static dispatch.
-Traits can inherit from other traits. This is done by specifying the parent trait in the trait definition. The child trait will then include the method signatures of the parent trait.
+- Traits are used to define shared behavior.
+- A trait is defined with the trait keyword, followed by the trait's name.
+- Traits can have methods with or without default implementations.
+- Traits can be implemented for any data type.
+- Traits can be used as function parameters, enabling dynamic dispatch.
+- Traits can be used as trait bounds on generic parameters, enabling static dispatch.
+- Traits can inherit from other traits. This is done by specifying the parent trait in the trait definition. 
+- The child trait will then include the method signatures of the parent trait.
 
 ### Generics
 
@@ -59,12 +59,12 @@ The `BasicWallet` struct is generic over the `Account` type, which allows it to 
 The `MultiCurrencyWallet` struct, on the other hand, uses trait objects to store multiple accounts of different types.
 
 #### Generics in Rust:  
-Generics are used to create functions and data types that can work with multiple types of data.
-Generics are declared using angle brackets <T> where T is a placeholder for the type.
-The actual type for T is determined at compile time.
-Generics can be constrained by traits to only accept types that implement certain behaviors.
-Multiple generic types can be used by separating them with commas, like <T, U>.
-Lifetimes, which dictate how references to data should be handled, can also be generic.
+* Generics are used to create functions and data types that can work with multiple types of data.
+* Generics are declared using angle brackets <T> where T is a placeholder for the type.
+* The actual type for T is determined at compile time.
+* Generics can be constrained by traits to only accept types that implement certain behaviors.
+* Multiple generic types can be used by separating them with commas, like <T, U>.
+* Lifetimes, which dictate how references to data should be handled, can also be generic.
 
 
 ### Polymorphism
@@ -74,11 +74,11 @@ For example, a `BasicWallet` and a `MultiCurrencyWallet` can both be treated as 
 a `BasicAccount` and a `PremiumAccount` can both be treated as an `Account`.
 
 #### Polymorphism in Rust:  
-Rust achieves polymorphism through the use of traits and trait objects.
-A trait defines a set of methods that a type must have to be considered as implementing that trait.
-Trait objects allow for multiple different types, each of which implement a particular trait, to be treated as the same general type.
-Trait objects are created by specifying a trait behind a reference, box, or other pointer type, like &dyn Trait or Box<dyn Trait>.
-Trait objects are dynamic and their type is checked at runtime.
+* Rust achieves polymorphism through the use of traits and trait objects.
+* A trait defines a set of methods that a type must have to be considered as implementing that trait.
+* Trait objects allow for multiple different types, each of which implement a particular trait, to be treated as the same general type.
+* Trait objects are created by specifying a trait behind a reference, box, or other pointer type, like &dyn Trait or Box<dyn Trait>.
+* Trait objects are dynamic and their type is checked at runtime.
 
 ## Functions
 
@@ -107,19 +107,15 @@ Trait objects are dynamic and their type is checked at runtime.
 ## Enums
 
 ### WalletType
-
-This enum represents the type of a wallet. It can be either `Basic` or `MultiCurrency`.
+This enum represents the type of wallet. It can be either `Basic` or `MultiCurrency`.
 
 ### AccountType
-
-This enum represents the type of an account. It can be either `Basic` or `Premium`.
+This enum represents the type of account. It can be either `Basic` or `Premium`.
 
 ## ID Generation
-
-The `wallet_id` and `account_number` are unique identifiers for wallets and accounts respectively. Their generation is not shown in the provided code, but they should be generated in a way that ensures their uniqueness.
+The `wallet_id` and `account_number` are unique identifiers for wallets and accounts respectively. 
 
 # Building and Testing
-
 To build the project, navigate to the project directory and run the following command:
 
 ```bash
