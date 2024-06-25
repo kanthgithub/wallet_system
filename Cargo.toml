@@ -3,6 +3,8 @@ name = "wallet_system"
 version = "0.1.0"
 edition = "2021"
 authors = ["kanth"]
+description = "A wallet system simulation in Rust."
+license = "MIT"
 
 [dependencies]
 rand = "0.9.0-alpha.1"
