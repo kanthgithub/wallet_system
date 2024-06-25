@@ -21,7 +21,7 @@ each with its own unique characteristics.
 
 `BasicWallet` is a simple wallet that can hold only one account. 
 It uses generics to allow for different types of accounts to be added to the wallet. 
-The account is set during the creation of the `BasicWallet`, and it cannot be changed afterwards. 
+The account is set during the creation of the `BasicWallet`, and it cannot be changed afterward. 
 This design is suitable for scenarios where a wallet is expected to have only one account.
 
 ### MultiCurrencyWallet
@@ -103,6 +103,7 @@ a `BasicAccount` and a `PremiumAccount` can both be treated as an `Account`.
 - `get_currency`: Returns the currency of the account.
 - `deposit`: Deposits money into the account.
 - `withdraw`: Withdraws money from the account.
+- `transfer`: Transfers money from the account to another account.
 
 ## Enums
 
